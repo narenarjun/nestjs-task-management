@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasksModule } from './tasks/tasks.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 import * as Joi from '@hapi/joi';
 @Module({
   imports: [
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         DATABASE_CONNECTION_URL: Joi.required(),
+        JWT_SECRET: Joi.required(),
       }),
     }),
     TasksModule,
@@ -25,6 +27,7 @@ import * as Joi from '@hapi/joi';
         synchronize: true, //! this should be disabled when deploying to prod,but it's great for development
       }),
     }),
+    AuthModule,
   ],
 })
 export class AppModule {}
