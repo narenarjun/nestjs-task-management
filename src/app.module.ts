@@ -7,9 +7,10 @@ import * as Joi from '@hapi/joi';
 @Module({
   imports: [
     ConfigModule.forRoot({
+      isGlobal: true,
       validationSchema: Joi.object({
-        DATABASE_CONNECTION_URL: Joi.required(),
-        JWT_SECRET: Joi.required(),
+        DATABASE_CONNECTION_URL: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
       }),
     }),
     TasksModule,
